@@ -23,4 +23,12 @@ router.post("/", (req, res) => {
     .then(item => res.json(item))
     .catch(err => console.log(err));
 });
+
+// PUBLIC DELETE route - api/items - delete an existing item
+router.delete("/:id", (req, res) => {
+  Item.findById(req.params.id)
+    .then(item => item.remove().then(() => res.json({ success: true })))
+    .catch(err => res.status(404).json({ success: false }));
+});
+
 module.exports = router;
