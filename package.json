@@ -5,7 +5,10 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "server": "nodemon server.js"
+    "server": "nodemon server.js",
+    "client": "yarn --cwd client start",
+    "client-install": "yarn --cwd client install",
+    "dev": "concurrently \"yarn run server\" \"yarn run client\""
   },
   "repository": "git@github.com:charlesmartinreed/mern-stack-intro.git",
   "author": "charlesmartinreed <charlesmartinreed@icloud.com>",
