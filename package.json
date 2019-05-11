@@ -1,29 +1,21 @@
 {
-  "name": "learn-the-mern",
+  "name": "mern-shopping-list",
   "version": "1.0.0",
   "description": "Shopping list built with the MERN stack",
   "main": "server.js",
   "scripts": {
-		"client-install": "npm install --prefix client",
     "start": "node server.js",
-		"server": "nodemon server.js",
-		"client": "npm start --prefix client",
-		"dev": "concurrently \"npm run server\" \"npm run client\""
+    "server": "nodemon server.js"
   },
-  "keywords": [
-    "Charles",
-    "Martin",
-    "Reed"
-  ],
-  "author": "Charles Martin Reed",
+  "repository": "git@github.com:charlesmartinreed/mern-stack-intro.git",
+  "author": "charlesmartinreed <charlesmartinreed@icloud.com>",
   "license": "MIT",
   "dependencies": {
-    "body-parser": "^1.18.3",
     "concurrently": "^4.1.0",
     "express": "^4.16.4",
-    "mongoose": "^5.4.19"
+    "mongoose": "^5.5.7"
   },
   "devDependencies": {
-    "nodemon": "^1.18.10"
+    "nodemon": "^1.19.0"
   }
 }
