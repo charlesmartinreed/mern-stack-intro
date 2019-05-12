@@ -1,20 +1,19 @@
 import React, { Component } from "react";
 import { Container, ListGroup, ListGroupItem, Button } from "reactstrap";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
+import { connect } from "react-redux"; // get redux state into React comp
+import { getItems } from "../actions/itemActions";
+import PropTypes from "prop-types";
+
 import uuid from "uuid";
 
 class ShoppingList extends Component {
-  state = {
-    items: [
-      { id: uuid.v4(), name: "Eggs" },
-      { id: uuid.v4(), name: "Seasoning Salt" },
-      { id: uuid.v4(), name: "Cereal" },
-      { id: uuid.v4(), name: "Bread" }
-    ]
-  };
+  componentDidMount() {
+    this.props.getItems();
+  }
 
   render() {
-    const { items } = this.state;
+    const { items } = this.props.item;
     return (
       <Container>
         <Button
@@ -59,4 +58,18 @@ class ShoppingList extends Component {
   }
 }
 
-export default ShoppingList;
+// getItems is our action, item represents our state because we're mapping that Redux state to our properties
+ShoppingList.propTypes = {
+  getItems: PropTypes.func.isRequired,
+  item: PropTypes.object.isRequired
+};
+
+// mapStateToProps allows us to take item state and map it into a component property - item comes from our rootReducer
+const mapStateToProps = state => ({
+  item: state.item
+});
+
+export default connect(
+  mapStateToProps,
+  { getItems }
+)(ShoppingList);
