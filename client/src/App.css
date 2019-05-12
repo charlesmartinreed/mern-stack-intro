@@ -1,0 +1,25 @@
+.remove-btn {
+  margin-right: 0.5rem;
+  font-size: 0.5rem;
+}
+
+/* stock */
+.fade-enter {
+  opacity: 0.01;
+}
+
+/* added item */
+.fade-enter-active {
+  opacity: 1;
+  transition: opacity 500ms ease-in-out;
+}
+
+.fade-exit {
+  opacity: 1;
+}
+
+/* removing item */
+.fade-exit-active {
+  opacity: 0.01;
+  transition: opacity 500ms ease-in-out;
+}
