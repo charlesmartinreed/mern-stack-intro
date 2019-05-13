@@ -24,7 +24,13 @@ if (process.env.NODE_ENV === "production") {
 }
 
 // DATABASE
-const db = require("./config/keys").mongoURI;
+const db = "";
+
+if (process.env.NODE_ENV === "production") {
+  db = process.env.mongoURI;
+} else {
+  db = require("./config/keys").mongoURI;
+}
 
 // Connect to mLab DB
 mongoose
