@@ -4,13 +4,12 @@ const app = express();
 const port = process.env.PORT || 5000;
 const path = require("path");
 
-const items = require("./routes/api/items");
-
 // MIDDLEWARE
 app.use(express.json());
 
 // Use routes
-app.use("/api/items", items);
+app.use("/api/items", require("./routes/api/items"));
+app.use("/api/users", require("./routes/api/users"));
 
 // Serve static assets IF IN PRODUCTION
 if (process.env.NODE_ENV === "production") {
@@ -36,7 +35,10 @@ if (process.env.NODE_ENV === "production") {
 mongoose
   .connect(
     db,
-    { useNewUrlParser: true }
+    {
+      useNewUrlParser: true,
+      useCreateIndex: true
+    }
   )
   .then(() => console.log("MongoDB connected"))
   .catch(err => console.log(err));
