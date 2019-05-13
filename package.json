@@ -9,7 +9,7 @@
     "client": "yarn --cwd client start",
     "client-install": "yarn --cwd client install",
     "dev": "concurrently \"yarn run server\" \"yarn run client\"",
-    "heroku-postbuild": "yarn start --env=development yarn --cwd client && yarn --cwd client build"
+    "heroku-postbuild": "YARN_PRODUCTION=false yarn --cwd client install && yarn --cwd client build"
   },
   "repository": "git@github.com:charlesmartinreed/mern-stack-intro.git",
   "author": "charlesmartinreed <charlesmartinreed@icloud.com>",
