@@ -11,6 +11,7 @@ const initialState = {
   ]
 };
 
+// items: [action.payload, ...state.items]
 export default function(state = initialState, action) {
   switch (action.type) {
     case GET_ITEMS:
@@ -21,6 +22,11 @@ export default function(state = initialState, action) {
       return {
         ...state,
         items: state.items.filter(item => item.id !== action.payload)
+      };
+    case ADD_ITEM:
+      return {
+        ...state,
+        items: state.items.concat([action.payload])
       };
     default:
       return state;
