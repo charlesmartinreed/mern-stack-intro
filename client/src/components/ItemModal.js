@@ -11,7 +11,6 @@ import {
 } from "reactstrap";
 import { connect } from "react-redux";
 import { addItem } from "../actions/itemActions";
-import uuid from "uuid";
 
 // a Container is a component that is hooked up to Redux - if you're using Redux state inside of a component, it's actually called a Container. Yes, Redux is super opinionated.
 class ItemModal extends Component {
@@ -35,7 +34,6 @@ class ItemModal extends Component {
     e.preventDefault();
 
     const newItem = {
-      id: uuid.v4(),
       name: this.state.name
     };
 
