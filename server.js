@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const app = express();
 const port = process.env.PORT || 5000;
 const path = require("path");
+const config = require("config");
 
 // MIDDLEWARE
 app.use(express.json());
@@ -10,6 +11,7 @@ app.use(express.json());
 // Use routes
 app.use("/api/items", require("./routes/api/items"));
 app.use("/api/users", require("./routes/api/users"));
+app.use("/api/auth", require("./routes/api/auth"));
 
 // Serve static assets IF IN PRODUCTION
 if (process.env.NODE_ENV === "production") {
@@ -28,7 +30,7 @@ let db;
 if (process.env.NODE_ENV === "production") {
   db = process.env.mongoURI;
 } else {
-  db = require("./config/keys").mongoURI;
+  db = config.get("mongoURI");
 }
 
 // Connect to mLab DB
