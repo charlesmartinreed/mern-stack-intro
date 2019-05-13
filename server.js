@@ -24,7 +24,7 @@ if (process.env.NODE_ENV === "production") {
 }
 
 // DATABASE
-const db = "";
+let db;
 
 if (process.env.NODE_ENV === "production") {
   db = process.env.mongoURI;
