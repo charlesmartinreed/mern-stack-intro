@@ -76,6 +76,33 @@ export const tokenConfig = getState => {
   return config;
 };
 
+// api/auth
+export const login = ({ email, password }) => dispatch => {
+  const config = {
+    headers: {
+      "Content-Type": "application/json"
+    }
+  };
+
+  const body = JSON.stringify({ email, password });
+
+  axios
+    .post("/api/auth", body, config)
+    .then(res =>
+      dispatch({
+        type: LOGIN_SUCCESS,
+        payload: res.data
+      })
+    )
+    .catch(err => {
+      const { data, status } = err.response;
+      dispatch(returnError(data, status, "LOGIN_FAIL"));
+      dispatch({
+        type: LOGIN_FAIL
+      });
+    });
+};
+
 // LOGOUT
 export const logout = () => {
   return {
