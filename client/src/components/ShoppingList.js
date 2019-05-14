@@ -10,6 +10,12 @@ class ShoppingList extends Component {
     this.props.getItems();
   }
 
+  static propTypes = {
+    getItems: PropTypes.func.isRequired,
+    item: PropTypes.object.isRequired,
+    isAuthenticated: PropTypes.bool
+  };
+
   handleDeleteItem = id => {
     this.props.deleteItem(id);
   };
@@ -23,14 +29,17 @@ class ShoppingList extends Component {
             {items.map(({ _id, name }) => (
               <CSSTransition key={_id} timeout={500} classNames="fade">
                 <ListGroupItem>
-                  <Button
-                    className="remove-btn"
-                    color="danger"
-                    size="sm"
-                    onClick={() => this.handleDeleteItem(_id)}
-                  >
-                    &times;
-                  </Button>
+                  {this.props.isAuthenticated ? (
+                    <Button
+                      className="remove-btn"
+                      color="danger"
+                      size="sm"
+                      onClick={() => this.handleDeleteItem(_id)}
+                    >
+                      &times;
+                    </Button>
+                  ) : null}
+
                   {name}
                 </ListGroupItem>
               </CSSTransition>
@@ -42,15 +51,10 @@ class ShoppingList extends Component {
   }
 }
 
-// getItems is our action, item represents our state because we're mapping that Redux state to our properties
-ShoppingList.propTypes = {
-  getItems: PropTypes.func.isRequired,
-  item: PropTypes.object.isRequired
-};
-
 // mapStateToProps allows us to take item state and map it into a component property - item comes from our rootReducer
 const mapStateToProps = state => ({
-  item: state.item
+  item: state.item,
+  isAuthenticated: state.auth.isAuthenticated
 });
 
 export default connect(
