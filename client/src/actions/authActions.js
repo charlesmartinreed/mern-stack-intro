@@ -28,6 +28,36 @@ export const loadUser = () => (dispatch, getState) => {
     });
 };
 
+// Register User - take in name, email and password
+export const register = ({ name, email, password }) => dispatch => {
+  // make post request to api/users
+  const config = {
+    headers: {
+      "Content-Type": "application/json"
+    }
+  };
+
+  const body = JSON.stringify({ name, email, password });
+
+  // endpoint returns user/token
+  axios
+    .post("/api/users", body, config)
+    .then(res =>
+      dispatch({
+        type: REGISTER_SUCCESS,
+        payload: res.data
+      })
+    )
+    .catch(err => {
+      const { data, status } = err.response;
+      dispatch(returnError(data, status, "REGISTER_FAIL"));
+      //remove token, set state values back to null
+      dispatch({
+        type: REGISTER_FAIL
+      });
+    });
+};
+
 // Setup axios config/headers
 export const tokenConfig = getState => {
   // grab token from local storage, referenced by checking the state. Pass it in the headers for our request.
@@ -35,7 +65,7 @@ export const tokenConfig = getState => {
 
   const config = {
     headers: {
-      "Content-type": "application/json"
+      "Content-Type": "application/json"
     }
   };
 
